@@ -1,38 +1,36 @@
-Update my existing React customer table to match the table layout shown in the reference image.
+Update the existing table in this file to add pagination and make it look like a professional paginated customer table.
+
+Do not create a new table and do not replace the existing customer data or functionality. Modify the existing table directly.
 
 Requirements:
 
-1. Keep my existing table columns, customer data, styling, and existing functionality unchanged unless required for pagination.
-2. Display exactly **4 customers per page**.
-3. Add pagination controls at the bottom-right of the table:
+* Display exactly **4 customers per page**.
+* Add a pagination footer below the table.
+* On the bottom-left, display:
+  **Showing 1 to 4 of 100 customers**
+  with the numbers calculated dynamically based on the current page and total customers.
+* On the bottom-right, add:
+  **Previous `<` → page numbers → Next `>`**
+* The number of pages must be calculated automatically based on the number of customers. Do not hardcode page numbers.
+* If there are many pages, show pagination similar to:
+  **< 1 2 3 ... 25 >**
+* If there are fewer pages, show only the required page numbers without unnecessary `...`.
+* Clicking a page number should display the corresponding 4 customers.
+* Previous should move to the previous page and Next should move to the next page.
+* Disable Previous on the first page and Next on the last page.
+* If the last page contains fewer than 4 customers, display only the remaining customers.
+* The "Showing X to Y of Z customers" text must update automatically for every page.
+* Keep all existing table columns, customer information, Action menu, sorting, filtering, and other existing functionality unchanged.
+* Keep the existing table design and styling, but make the pagination footer visually clean and aligned:
 
-   * Previous button `<`
-   * Page numbers: `1, 2, 3, ...`
-   * Next button `>`
-4. The number of pages must be **dynamic**, based on the total number of customers.
+  * Showing text on the left
+  * Pagination controls on the right
+  * Current page highlighted with a dark background and white text
+  * Other page buttons with a light background
+  * Previous/Next buttons styled consistently
+  * Add a subtle divider above the pagination footer
+* Make the pagination responsive.
+* The pagination must work dynamically with any number of customers, including customers received later from the backend API.
+* Use the existing code structure and make only the necessary changes.
 
-   * Example: 100 customers → 25 pages.
-   * 10 customers → 3 pages.
-   * 4 customers → 1 page.
-   * Do NOT hardcode `1–25`.
-5. Only show page numbers that are relevant to the total number of pages, using `...` when there are many pages, similar to the reference image.
-6. When the user clicks a page number, display the corresponding 4 customers.
-7. Previous/Next buttons must work correctly and be disabled when:
-
-   * Previous → on the first page
-   * Next → on the last page
-8. Add a footer at the bottom-left showing:
-   **Showing X to Y of Z customers**
-   where X, Y, and Z are calculated dynamically.
-   Example:
-
-   * Page 1 of 25 → `Showing 1 to 4 of 100 customers`
-   * Page 2 → `Showing 5 to 8 of 100 customers`
-   * Last page should correctly handle fewer than 4 customers.
-9. Use React state (`useState`) for the current page and calculate the displayed customers using pagination logic such as `slice()`.
-10. Keep the table responsive and make the pagination visually similar to the reference image.
-11. Do not create a new table component if my existing `Table` component can be updated. Modify my existing code with minimal changes.
-12. Make sure pagination works with the actual customer array length, regardless of how many customers are returned from the backend/API.
-13. If the customer data is later fetched from the Spring Boot API, the pagination should automatically adjust to the number of customers received.
-
-Please provide the exact code changes needed in my existing component and explain where each change should be placed.
+First inspect the existing code in this file, then directly update the existing table to implement all of the above.
