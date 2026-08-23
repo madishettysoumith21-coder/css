@@ -1,14 +1,38 @@
-What Went Well
+Update my existing React customer table to match the table layout shown in the reference image.
 
-Successfully integrated the front-end components.
-Completed the front-end implementation for the assigned user stories.
+Requirements:
 
-What Can Be Improved
+1. Keep my existing table columns, customer data, styling, and existing functionality unchanged unless required for pagination.
+2. Display exactly **4 customers per page**.
+3. Add pagination controls at the bottom-right of the table:
 
-Improve menu bar and avatar styling.
-Add currency symbols to amounts.
+   * Previous button `<`
+   * Page numbers: `1, 2, 3, ...`
+   * Next button `>`
+4. The number of pages must be **dynamic**, based on the total number of customers.
 
-Further Actions
+   * Example: 100 customers → 25 pages.
+   * 10 customers → 3 pages.
+   * 4 customers → 1 page.
+   * Do NOT hardcode `1–25`.
+5. Only show page numbers that are relevant to the total number of pages, using `...` when there are many pages, similar to the reference image.
+6. When the user clicks a page number, display the corresponding 4 customers.
+7. Previous/Next buttons must work correctly and be disabled when:
 
-Work on User Stories 3 and 4.
-Create feature branches for cleaner pulls.
+   * Previous → on the first page
+   * Next → on the last page
+8. Add a footer at the bottom-left showing:
+   **Showing X to Y of Z customers**
+   where X, Y, and Z are calculated dynamically.
+   Example:
+
+   * Page 1 of 25 → `Showing 1 to 4 of 100 customers`
+   * Page 2 → `Showing 5 to 8 of 100 customers`
+   * Last page should correctly handle fewer than 4 customers.
+9. Use React state (`useState`) for the current page and calculate the displayed customers using pagination logic such as `slice()`.
+10. Keep the table responsive and make the pagination visually similar to the reference image.
+11. Do not create a new table component if my existing `Table` component can be updated. Modify my existing code with minimal changes.
+12. Make sure pagination works with the actual customer array length, regardless of how many customers are returned from the backend/API.
+13. If the customer data is later fetched from the Spring Boot API, the pagination should automatically adjust to the number of customers received.
+
+Please provide the exact code changes needed in my existing component and explain where each change should be placed.
