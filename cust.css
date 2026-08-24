@@ -1,132 +1,105 @@
-helloworld.js
-import React from "react";
+data.js
+export const initialCustomers = [
+  {
+    id: 1,
+    firstName: "Sundar",
+    lastName: "Pichai",
+    email: "sundar.pichai@google.com",
+    accountType: "SAVINGS_ACCOUNT"
+  },
+  {
+    id: 2,
+    firstName: "Jeff",
+    lastName: "Bezos",
+    email: "jeff.bezos@amazon.com",
+    accountType: "CURRENT_ACCOUNT"
+  },
+  {
+    id: 3,
+    firstName: "Satya",
+    lastName: "Nadella",
+    email: "satya.nadella@microsoft.com",
+    accountType: "SAVINGS_ACCOUNT"
+  },
+  {
+    id: 4,
+    firstName: "Sergey",
+    lastName: "Brin",
+    email: "sergey.brin@google.com",
+    accountType: "CURRENT_ACCOUNT"
+  },
+  {
+    id: 5,
+    firstName: "Larry",
+    lastName: "Page",
+    email: "larry.page@google.com",
+    accountType: "SAVINGS_ACCOUNT"
+  }
+];
 
-function HelloWorld() {
-  return (
-    <div>
-      Hello World Component
-    </div>
+CustomerDetails.js
+import { useParams, Link } from "react-router-dom";
+import { initialCustomers } from "../data";
+
+const CustomerDetails = () => {
+  const { id } = useParams();
+
+  const customer = initialCustomers.find(
+    (c) => c.id === parseInt(id)
   );
-}
 
-export default HelloWorld;
+  if (!customer) {
+    return (
+      <div className="container mt-4">
+        <h3>Customer not found!</h3>
 
- HelloMessage.js
- import React from "react";
-
-function HelloMessage({ name, message = "Hi, Hello" }) {
-  return (
-    <div>
-      Message from {name}: {message}
-    </div>
-  );
-}
-
-export default HelloMessage;
-
- Counter.js
- import React, { useEffect, useState } from "react";
-
-function Counter() {
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((previousSeconds) => previousSeconds + 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+        <Link to="/customers" className="btn btn-secondary mt-3">
+          Back to Customers
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      Time Elapsed : {seconds}
-    </div>
-  );
-}
+    <div className="container mt-4">
 
-export default Counter;
+      <h3>Customer Details</h3>
 
-   /Alert.js
-   import React from "react";
+      <div className="customer-details">
 
-function Alert() {
-  const showAlert = () => {
-    alert("React is a great UI library");
-  };
+        <p>
+          <b>ID:</b> {customer.id}
+        </p>
 
-  return (
-    <button onClick={showAlert}>
-      Click me Please
-    </button>
-  );
-}
+        <p>
+          <b>First Name:</b> {customer.firstName}
+        </p>
 
-export default Alert;
-App.js
-                     import React from "react";
+        <p>
+          <b>Last Name:</b> {customer.lastName}
+        </p>
 
-import HelloWorld from "./Components/helloworld";
-import HelloMessage from "./Components/HelloMessage";
-import Counter from "./Components/Counter";
-import Alert from "./Components/Alert";
+        <p>
+          <b>Email:</b> {customer.email}
+        </p>
 
-import "./App.css";
+        <p>
+          <b>Account Type:</b> {customer.accountType}
+        </p>
 
-function App() {
-  return (
-    <div className="page-container">
+      </div>
 
-      <h3>UseCase 1 - Components, Props and States</h3>
-
-      <hr />
-
-      <h4>Hello World Component</h4>
-      <HelloWorld />
-
-      <h4>Single Prop</h4>
-      <HelloMessage name="Euler" />
-
-      <h4>Multiple Props</h4>
-      <HelloMessage
-        name="Ramanujam"
-        message="I got this in my dreams"
-      />
-
-      <h4>State and Virtual DOM</h4>
-      <Counter />
-
-      <h4>Interactive Component - Event Handling</h4>
-      <Alert />
+      <Link
+        to="/customers"
+        className="btn btn-secondary mt-3"
+      >
+        Back to List
+      </Link>
 
     </div>
   );
-}
+};
 
-export default App;
- App.css
- .page-container {
-  margin-left: 100px;
-  margin-right: 100px;
-  padding-top: 30px;
-}
+export default CustomerDetails;
 
-.page-container h3 {
-  margin-bottom: 20px;
-}
-
-.page-container h4 {
-  margin-top: 25px;
-  margin-bottom: 12px;
-}
-
-.page-container hr {
-  margin-bottom: 20px;
-}
-
-.page-container button {
-  padding: 5px 10px;
-  cursor: pointer;
-}
+    
