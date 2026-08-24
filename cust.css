@@ -1,36 +1,132 @@
-Update the existing table in this file to add pagination and make it look like a professional paginated customer table.
+helloworld.js
+import React from "react";
 
-Do not create a new table and do not replace the existing customer data or functionality. Modify the existing table directly.
+function HelloWorld() {
+  return (
+    <div>
+      Hello World Component
+    </div>
+  );
+}
 
-Requirements:
+export default HelloWorld;
 
-* Display exactly **4 customers per page**.
-* Add a pagination footer below the table.
-* On the bottom-left, display:
-  **Showing 1 to 4 of 100 customers**
-  with the numbers calculated dynamically based on the current page and total customers.
-* On the bottom-right, add:
-  **Previous `<` → page numbers → Next `>`**
-* The number of pages must be calculated automatically based on the number of customers. Do not hardcode page numbers.
-* If there are many pages, show pagination similar to:
-  **< 1 2 3 ... 25 >**
-* If there are fewer pages, show only the required page numbers without unnecessary `...`.
-* Clicking a page number should display the corresponding 4 customers.
-* Previous should move to the previous page and Next should move to the next page.
-* Disable Previous on the first page and Next on the last page.
-* If the last page contains fewer than 4 customers, display only the remaining customers.
-* The "Showing X to Y of Z customers" text must update automatically for every page.
-* Keep all existing table columns, customer information, Action menu, sorting, filtering, and other existing functionality unchanged.
-* Keep the existing table design and styling, but make the pagination footer visually clean and aligned:
+ HelloMessage.js
+ import React from "react";
 
-  * Showing text on the left
-  * Pagination controls on the right
-  * Current page highlighted with a dark background and white text
-  * Other page buttons with a light background
-  * Previous/Next buttons styled consistently
-  * Add a subtle divider above the pagination footer
-* Make the pagination responsive.
-* The pagination must work dynamically with any number of customers, including customers received later from the backend API.
-* Use the existing code structure and make only the necessary changes.
+function HelloMessage({ name, message = "Hi, Hello" }) {
+  return (
+    <div>
+      Message from {name}: {message}
+    </div>
+  );
+}
 
-First inspect the existing code in this file, then directly update the existing table to implement all of the above.
+export default HelloMessage;
+
+ Counter.js
+ import React, { useEffect, useState } from "react";
+
+function Counter() {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((previousSeconds) => previousSeconds + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return (
+    <div>
+      Time Elapsed : {seconds}
+    </div>
+  );
+}
+
+export default Counter;
+
+   /Alert.js
+   import React from "react";
+
+function Alert() {
+  const showAlert = () => {
+    alert("React is a great UI library");
+  };
+
+  return (
+    <button onClick={showAlert}>
+      Click me Please
+    </button>
+  );
+}
+
+export default Alert;
+App.js
+                     import React from "react";
+
+import HelloWorld from "./Components/helloworld";
+import HelloMessage from "./Components/HelloMessage";
+import Counter from "./Components/Counter";
+import Alert from "./Components/Alert";
+
+import "./App.css";
+
+function App() {
+  return (
+    <div className="page-container">
+
+      <h3>UseCase 1 - Components, Props and States</h3>
+
+      <hr />
+
+      <h4>Hello World Component</h4>
+      <HelloWorld />
+
+      <h4>Single Prop</h4>
+      <HelloMessage name="Euler" />
+
+      <h4>Multiple Props</h4>
+      <HelloMessage
+        name="Ramanujam"
+        message="I got this in my dreams"
+      />
+
+      <h4>State and Virtual DOM</h4>
+      <Counter />
+
+      <h4>Interactive Component - Event Handling</h4>
+      <Alert />
+
+    </div>
+  );
+}
+
+export default App;
+ App.css
+ .page-container {
+  margin-left: 100px;
+  margin-right: 100px;
+  padding-top: 30px;
+}
+
+.page-container h3 {
+  margin-bottom: 20px;
+}
+
+.page-container h4 {
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
+.page-container hr {
+  margin-bottom: 20px;
+}
+
+.page-container button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
