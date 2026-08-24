@@ -1,105 +1,88 @@
-data.js
 export const initialCustomers = [
   {
     id: 1,
     firstName: "Sundar",
     lastName: "Pichai",
     email: "sundar.pichai@google.com",
-    accountType: "SAVINGS_ACCOUNT"
+    accounts: [
+      {
+        accountNo: "1001999",
+        type: "SAVINGS_ACCOUNT",
+        branch: "Bellandur",
+        balance: 1000
+      },
+      {
+        accountNo: "1001888",
+        type: "SAVINGS_ACCOUNT",
+        branch: "Indira Nagar",
+        balance: 2000
+      }
+    ]
   },
+
   {
     id: 2,
     firstName: "Jeff",
     lastName: "Bezos",
     email: "jeff.bezos@amazon.com",
-    accountType: "CURRENT_ACCOUNT"
+    accounts: [
+      {
+        accountNo: "1002001",
+        type: "CURRENT_ACCOUNT",
+        branch: "Whitefield",
+        balance: 5000
+      },
+      {
+        accountNo: "1002002",
+        type: "SAVINGS_ACCOUNT",
+        branch: "MG Road",
+        balance: 3000
+      }
+    ]
   },
+
   {
     id: 3,
     firstName: "Satya",
     lastName: "Nadella",
     email: "satya.nadella@microsoft.com",
-    accountType: "SAVINGS_ACCOUNT"
+    accounts: [
+      {
+        accountNo: "1003001",
+        type: "SAVINGS_ACCOUNT",
+        branch: "Koramangala",
+        balance: 4000
+      }
+    ]
   },
+
   {
     id: 4,
     firstName: "Sergey",
     lastName: "Brin",
     email: "sergey.brin@google.com",
-    accountType: "CURRENT_ACCOUNT"
+    accounts: [
+      {
+        accountNo: "1004001",
+        type: "CURRENT_ACCOUNT",
+        branch: "Indiranagar",
+        balance: 6000
+      }
+    ]
   },
+
   {
     id: 5,
     firstName: "Larry",
     lastName: "Page",
     email: "larry.page@google.com",
-    accountType: "SAVINGS_ACCOUNT"
+    accounts: [
+      {
+        accountNo: "1005001",
+        type: "SAVINGS_ACCOUNT",
+        branch: "Bellandur",
+        balance: 2500
+      }
+    ]
   }
 ];
-
-CustomerDetails.js
-import { useParams, Link } from "react-router-dom";
-import { initialCustomers } from "../data";
-
-const CustomerDetails = () => {
-  const { id } = useParams();
-
-  const customer = initialCustomers.find(
-    (c) => c.id === parseInt(id)
-  );
-
-  if (!customer) {
-    return (
-      <div className="container mt-4">
-        <h3>Customer not found!</h3>
-
-        <Link to="/customers" className="btn btn-secondary mt-3">
-          Back to Customers
-        </Link>
-      </div>
-    );
-  }
-
-  return (
-    <div className="container mt-4">
-
-      <h3>Customer Details</h3>
-
-      <div className="customer-details">
-
-        <p>
-          <b>ID:</b> {customer.id}
-        </p>
-
-        <p>
-          <b>First Name:</b> {customer.firstName}
-        </p>
-
-        <p>
-          <b>Last Name:</b> {customer.lastName}
-        </p>
-
-        <p>
-          <b>Email:</b> {customer.email}
-        </p>
-
-        <p>
-          <b>Account Type:</b> {customer.accountType}
-        </p>
-
-      </div>
-
-      <Link
-        to="/customers"
-        className="btn btn-secondary mt-3"
-      >
-        Back to List
-      </Link>
-
-    </div>
-  );
-};
-
-export default CustomerDetails;
-
-    
