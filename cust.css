@@ -1,88 +1,15 @@
-export const initialCustomers = [
-  {
-    id: 1,
-    firstName: "Sundar",
-    lastName: "Pichai",
-    email: "sundar.pichai@google.com",
-    accounts: [
-      {
-        accountNo: "1001999",
-        type: "SAVINGS_ACCOUNT",
-        branch: "Bellandur",
-        balance: 1000
-      },
-      {
-        accountNo: "1001888",
-        type: "SAVINGS_ACCOUNT",
-        branch: "Indira Nagar",
-        balance: 2000
-      }
-    ]
-  },
 
-  {
-    id: 2,
-    firstName: "Jeff",
-    lastName: "Bezos",
-    email: "jeff.bezos@amazon.com",
-    accounts: [
-      {
-        accountNo: "1002001",
-        type: "CURRENT_ACCOUNT",
-        branch: "Whitefield",
-        balance: 5000
-      },
-      {
-        accountNo: "1002002",
-        type: "SAVINGS_ACCOUNT",
-        branch: "MG Road",
-        balance: 3000
-      }
-    ]
-  },
+# H2 Database
+spring.datasource.url=jdbc:h2:mem:wealthcore
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
 
-  {
-    id: 3,
-    firstName: "Satya",
-    lastName: "Nadella",
-    email: "satya.nadella@microsoft.com",
-    accounts: [
-      {
-        accountNo: "1003001",
-        type: "SAVINGS_ACCOUNT",
-        branch: "Koramangala",
-        balance: 4000
-      }
-    ]
-  },
+# JPA / Hibernate
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 
-  {
-    id: 4,
-    firstName: "Sergey",
-    lastName: "Brin",
-    email: "sergey.brin@google.com",
-    accounts: [
-      {
-        accountNo: "1004001",
-        type: "CURRENT_ACCOUNT",
-        branch: "Indiranagar",
-        balance: 6000
-      }
-    ]
-  },
-
-  {
-    id: 5,
-    firstName: "Larry",
-    lastName: "Page",
-    email: "larry.page@google.com",
-    accounts: [
-      {
-        accountNo: "1005001",
-        type: "SAVINGS_ACCOUNT",
-        branch: "Bellandur",
-        balance: 2500
-      }
-    ]
-  }
-];
+# H2 Console
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
