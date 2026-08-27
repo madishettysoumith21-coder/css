@@ -1,7 +1,121 @@
-package com.scb.wealthcore.models.fd;
+package com.scb.wealthcore.models.bond;
 
-public enum FDStatus {
-    ACTIVE,
-    MATURED,
-    CLOSED
+import com.scb.wealthcore.models.account.Account;
+import com.scb.wealthcore.models.product.Product;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "bonds")
+public class Bond {
+
+    @Id
+    @Column(name = "bond_id")
+    private String bondId;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @Column(name = "bond_name")
+    private String bondName;
+
+    @Column(name = "face_value")
+    private BigDecimal faceValue;
+
+    @Column(name = "interest_rate")
+    private BigDecimal interestRate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private BondStatus status;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "maturity_date")
+    private LocalDate maturityDate;
+
+
+    public Bond() {
+    }
+
+
+    public String getBondId() {
+        return bondId;
+    }
+
+    public void setBondId(String bondId) {
+        this.bondId = bondId;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getBondName() {
+        return bondName;
+    }
+
+    public void setBondName(String bondName) {
+        this.bondName = bondName;
+    }
+
+    public BigDecimal getFaceValue() {
+        return faceValue;
+    }
+
+    public void setFaceValue(BigDecimal faceValue) {
+        this.faceValue = faceValue;
+    }
+
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public BondStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BondStatus status) {
+        this.status = status;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getMaturityDate() {
+        return maturityDate;
+    }
+
+    public void setMaturityDate(LocalDate maturityDate) {
+        this.maturityDate = maturityDate;
+    }
 }
