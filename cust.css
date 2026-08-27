@@ -1,4 +1,4 @@
-package com.scb.wealthcore.models.insurance;
+package com.scb.wealthcore.models.portfoliomanagement;
 
 import com.scb.wealthcore.models.account.Account;
 import com.scb.wealthcore.models.product.Product;
@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "insurances")
-public class Insurance {
+@Table(name = "portfolio_management")
+public class PortfolioManagement {
 
     @Id
-    @Column(name = "insurance_id")
-    private String insuranceId;
+    @Column(name = "portfolio_id")
+    private String portfolioId;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -23,40 +23,34 @@ public class Insurance {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "insurance_name")
-    private String insuranceName;
+    @Column(name = "portfolio_value")
+    private BigDecimal portfolioValue;
+
+    @Column(name = "management_fee")
+    private BigDecimal managementFee;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "subscription_type")
-    private SubscriptionType subscriptionType;
-
-    @Column(name = "premium_amount")
-    private BigDecimal premiumAmount;
-
-    @Column(name = "coverage_amount")
-    private BigDecimal coverageAmount;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private InsuranceStatus status;
+    @Column(name = "profile_risk")
+    private ProfileRisk profileRisk;
 
     @Column(name = "start_date")
     private LocalDate startDate;
 
-    @Column(name = "maturity_date")
-    private LocalDate maturityDate;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private PortfolioStatus status;
 
 
-    public Insurance() {
+    public PortfolioManagement() {
     }
 
 
-    public String getInsuranceId() {
-        return insuranceId;
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
-    public void setInsuranceId(String insuranceId) {
-        this.insuranceId = insuranceId;
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
     public Account getAccount() {
@@ -75,44 +69,28 @@ public class Insurance {
         this.product = product;
     }
 
-    public String getInsuranceName() {
-        return insuranceName;
+    public BigDecimal getPortfolioValue() {
+        return portfolioValue;
     }
 
-    public void setInsuranceName(String insuranceName) {
-        this.insuranceName = insuranceName;
+    public void setPortfolioValue(BigDecimal portfolioValue) {
+        this.portfolioValue = portfolioValue;
     }
 
-    public SubscriptionType getSubscriptionType() {
-        return subscriptionType;
+    public BigDecimal getManagementFee() {
+        return managementFee;
     }
 
-    public void setSubscriptionType(SubscriptionType subscriptionType) {
-        this.subscriptionType = subscriptionType;
+    public void setManagementFee(BigDecimal managementFee) {
+        this.managementFee = managementFee;
     }
 
-    public BigDecimal getPremiumAmount() {
-        return premiumAmount;
+    public ProfileRisk getProfileRisk() {
+        return profileRisk;
     }
 
-    public void setPremiumAmount(BigDecimal premiumAmount) {
-        this.premiumAmount = premiumAmount;
-    }
-
-    public BigDecimal getCoverageAmount() {
-        return coverageAmount;
-    }
-
-    public void setCoverageAmount(BigDecimal coverageAmount) {
-        this.coverageAmount = coverageAmount;
-    }
-
-    public InsuranceStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(InsuranceStatus status) {
-        this.status = status;
+    public void setProfileRisk(ProfileRisk profileRisk) {
+        this.profileRisk = profileRisk;
     }
 
     public LocalDate getStartDate() {
@@ -123,26 +101,27 @@ public class Insurance {
         this.startDate = startDate;
     }
 
-    public LocalDate getMaturityDate() {
-        return maturityDate;
+    public PortfolioStatus getStatus() {
+        return status;
     }
 
-    public void setMaturityDate(LocalDate maturityDate) {
-        this.maturityDate = maturityDate;
+    public void setStatus(PortfolioStatus status) {
+        this.status = status;
     }
 }
 
-package com.scb.wealthcore.models.insurance;
+package com.scb.wealthcore.models.portfoliomanagement;
 
-public enum SubscriptionType {
-    INDIVIDUAL,
-    FAMILY
+public enum ProfileRisk {
+    LOW,
+    MEDIUM,
+    HIGH
 }
 
-package com.scb.wealthcore.models.insurance;
+package com.scb.wealthcore.models.portfoliomanagement;
 
-public enum InsuranceStatus {
+public enum PortfolioStatus {
     ACTIVE,
     INACTIVE,
-    EXPIRED
+    CLOSED
 }
