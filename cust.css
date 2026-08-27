@@ -1,15 +1,42 @@
-package com.scb.wealthcore.models.account;
+package com.scb.wealthcore.models.rm;
 
-public enum AccountType {
-    SAVINGS,
-    CURRENT,
-    INVESTMENT
-}
+import com.scb.wealthcore.models.customer.Customer;
+import jakarta.persistence.*;
 
-package com.scb.wealthcore.models.account;
+import java.util.ArrayList;
+import java.util.List;
 
-public enum AccountStatus {
-    ACTIVE,
-    INACTIVE,
-    CLOSED
+@Entity
+@Table(name = "rm")
+public class RM {
+
+    @Id
+    @Column(name = "rm_id")
+    private String rmId;
+
+    // Add the RM columns from your schema here
+
+    @OneToMany(mappedBy = "rm")
+    private List<Customer> customers = new ArrayList<>();
+
+
+    public RM() {
+    }
+
+
+    public String getRmId() {
+        return rmId;
+    }
+
+    public void setRmId(String rmId) {
+        this.rmId = rmId;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
 }
