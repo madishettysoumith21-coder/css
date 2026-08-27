@@ -1,74 +1,79 @@
-package com.scb.wealthcore.models.product;
+package com.scb.wealthcore.models.transaction;
 
-import com.scb.wealthcore.models.fd.FD;
-import com.scb.wealthcore.models.bond.Bond;
-import com.scb.wealthcore.models.mutualfund.MutualFund;
-import com.scb.wealthcore.models.insurance.Insurance;
-import com.scb.wealthcore.models.portfoliomanagement.PortfolioManagement;
-
+import com.scb.wealthcore.models.account.Account;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "transactions")
+public class Transaction {
 
     @Id
-    @Column(name = "product_id")
-    private String productId;
+    @Column(name = "transaction_id")
+    private String transactionId;
 
-    @Column(name = "product_name")
-    private String productName;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @Column(name = "transaction_date")
+    private LocalDateTime transactionDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_type")
+    private TransactionType transactionType;
+
+    @Column(name = "amount")
+    private BigDecimal amount;
 
     @Column(name = "description")
     private String description;
 
 
-    // One Product can have many Fixed Deposits
-    @OneToMany(mappedBy = "product")
-    private List<FD> fixedDeposits = new ArrayList<>();
-
-
-    // One Product can have many Bonds
-    @OneToMany(mappedBy = "product")
-    private List<Bond> bonds = new ArrayList<>();
-
-
-    // One Product can have many Mutual Funds
-    @OneToMany(mappedBy = "product")
-    private List<MutualFund> mutualFunds = new ArrayList<>();
-
-
-    // One Product can have many Insurances
-    @OneToMany(mappedBy = "product")
-    private List<Insurance> insurances = new ArrayList<>();
-
-
-    // One Product can have many Portfolio Management records
-    @OneToMany(mappedBy = "product")
-    private List<PortfolioManagement> portfolioManagements = new ArrayList<>();
-
-
-    public Product() {
+    public Transaction() {
     }
 
 
-    public String getProductId() {
-        return productId;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public String getProductName() {
-        return productName;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public String getDescription() {
@@ -77,45 +82,5 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<FD> getFixedDeposits() {
-        return fixedDeposits;
-    }
-
-    public void setFixedDeposits(List<FD> fixedDeposits) {
-        this.fixedDeposits = fixedDeposits;
-    }
-
-    public List<Bond> getBonds() {
-        return bonds;
-    }
-
-    public void setBonds(List<Bond> bonds) {
-        this.bonds = bonds;
-    }
-
-    public List<MutualFund> getMutualFunds() {
-        return mutualFunds;
-    }
-
-    public void setMutualFunds(List<MutualFund> mutualFunds) {
-        this.mutualFunds = mutualFunds;
-    }
-
-    public List<Insurance> getInsurances() {
-        return insurances;
-    }
-
-    public void setInsurances(List<Insurance> insurances) {
-        this.insurances = insurances;
-    }
-
-    public List<PortfolioManagement> getPortfolioManagements() {
-        return portfolioManagements;
-    }
-
-    public void setPortfolioManagements(List<PortfolioManagement> portfolioManagements) {
-        this.portfolioManagements = portfolioManagements;
     }
 }
