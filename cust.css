@@ -1,4 +1,4 @@
-package com.scb.wealthcore.models.advice;
+package com.scb.wealthcore.models.statement;
 
 import com.scb.wealthcore.models.customer.Customer;
 import com.scb.wealthcore.models.rm.RM;
@@ -7,12 +7,12 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "advice_logs")
-public class AdviceLog {
+@Table(name = "statement_logs")
+public class StatementLog {
 
     @Id
-    @Column(name = "advice_id")
-    private String adviceId;
+    @Column(name = "statement_id")
+    private String statementId;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -22,24 +22,24 @@ public class AdviceLog {
     @JoinColumn(name = "rm_id")
     private RM rm;
 
-    @Column(name = "advice_date")
-    private LocalDateTime adviceDate;
+    @Column(name = "statement_date")
+    private LocalDateTime statementDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private AdviceStatus status;
+    private StatementStatus status;
 
 
-    public AdviceLog() {
+    public StatementLog() {
     }
 
 
-    public String getAdviceId() {
-        return adviceId;
+    public String getStatementId() {
+        return statementId;
     }
 
-    public void setAdviceId(String adviceId) {
-        this.adviceId = adviceId;
+    public void setStatementId(String statementId) {
+        this.statementId = statementId;
     }
 
     public Customer getCustomer() {
@@ -58,26 +58,26 @@ public class AdviceLog {
         this.rm = rm;
     }
 
-    public LocalDateTime getAdviceDate() {
-        return adviceDate;
+    public LocalDateTime getStatementDate() {
+        return statementDate;
     }
 
-    public void setAdviceDate(LocalDateTime adviceDate) {
-        this.adviceDate = adviceDate;
+    public void setStatementDate(LocalDateTime statementDate) {
+        this.statementDate = statementDate;
     }
 
-    public AdviceStatus getStatus() {
+    public StatementStatus getStatus() {
         return status;
     }
 
-    public void setStatus(AdviceStatus status) {
+    public void setStatus(StatementStatus status) {
         this.status = status;
     }
 }
 
-package com.scb.wealthcore.models.advice;
+package com.scb.wealthcore.models.statement;
 
-public enum AdviceStatus {
+public enum StatementStatus {
     GENERATED,
     SENT,
     FAILED
