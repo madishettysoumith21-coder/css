@@ -1,45 +1,44 @@
-package com.scb.wealthcore.models.statement;
+package com.scb.wealthcore.models.alert;
 
 import com.scb.wealthcore.models.customer.Customer;
-import com.scb.wealthcore.models.rm.RM;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "statement_logs")
-public class StatementLog {
+@Table(name = "alerts")
+public class Alert {
 
     @Id
-    @Column(name = "statement_id")
-    private String statementId;
+    @Column(name = "alert_id")
+    private String alertId;
 
+    // Many Alerts belong to one Customer
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "rm_id")
-    private RM rm;
+    @Column(name = "alert_date")
+    private LocalDate alertDate;
 
-    @Column(name = "statement_date")
-    private LocalDateTime statementDate;
+    @Column(name = "message")
+    private String message;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private StatementStatus status;
+    private AlertStatus status;
 
 
-    public StatementLog() {
+    public Alert() {
     }
 
 
-    public String getStatementId() {
-        return statementId;
+    public String getAlertId() {
+        return alertId;
     }
 
-    public void setStatementId(String statementId) {
-        this.statementId = statementId;
+    public void setAlertId(String alertId) {
+        this.alertId = alertId;
     }
 
     public Customer getCustomer() {
@@ -50,35 +49,35 @@ public class StatementLog {
         this.customer = customer;
     }
 
-    public RM getRm() {
-        return rm;
+    public LocalDate getAlertDate() {
+        return alertDate;
     }
 
-    public void setRm(RM rm) {
-        this.rm = rm;
+    public void setAlertDate(LocalDate alertDate) {
+        this.alertDate = alertDate;
     }
 
-    public LocalDateTime getStatementDate() {
-        return statementDate;
+    public String getMessage() {
+        return message;
     }
 
-    public void setStatementDate(LocalDateTime statementDate) {
-        this.statementDate = statementDate;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public StatementStatus getStatus() {
+    public AlertStatus getStatus() {
         return status;
     }
 
-    public void setStatus(StatementStatus status) {
+    public void setStatus(AlertStatus status) {
         this.status = status;
     }
 }
 
-package com.scb.wealthcore.models.statement;
+package com.scb.wealthcore.models.alert;
 
-public enum StatementStatus {
-    GENERATED,
-    SENT,
-    FAILED
+public enum AlertStatus {
+    ACTIVE,
+    READ,
+    DISMISSED
 }
