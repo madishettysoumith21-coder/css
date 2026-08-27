@@ -1,9 +1,130 @@
-package com.scb.wealthcore.models.transaction;
+import com.scb.wealthcore.models.account.Account;
+import com.scb.wealthcore.models.product.Product;
+import jakarta.persistence.*;
 
-public enum TransactionType {
-    DEPOSIT,
-    WITHDRAWAL,
-    TRANSFER,
-    INVESTMENT,
-    REDEMPTION
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "fixed_deposit")
+public class FD {
+
+    @Id
+    @Column(name = "fd_id")
+    private String fdId;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @Column(name = "fd_number")
+    private String fdNumber;
+
+    @Column(name = "principle_amount")
+    private BigDecimal principleAmount;
+
+    @Column(name = "interest_rate")
+    private BigDecimal interestRate;
+
+    @Column(name = "maturity_amount")
+    private BigDecimal maturityAmount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private FDStatus status;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "maturity_date")
+    private LocalDate maturityDate;
+
+
+    public FD() {
+    }
+
+
+    public String getFdId() {
+        return fdId;
+    }
+
+    public void setFdId(String fdId) {
+        this.fdId = fdId;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getFdNumber() {
+        return fdNumber;
+    }
+
+    public void setFdNumber(String fdNumber) {
+        this.fdNumber = fdNumber;
+    }
+
+    public BigDecimal getPrincipleAmount() {
+        return principleAmount;
+    }
+
+    public void setPrincipleAmount(BigDecimal principleAmount) {
+        this.principleAmount = principleAmount;
+    }
+
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public BigDecimal getMaturityAmount() {
+        return maturityAmount;
+    }
+
+    public void setMaturityAmount(BigDecimal maturityAmount) {
+        this.maturityAmount = maturityAmount;
+    }
+
+    public FDStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FDStatus status) {
+        this.status = status;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getMaturityDate() {
+        return maturityDate;
+    }
+
+    public void setMaturityDate(LocalDate maturityDate) {
+        this.maturityDate = maturityDate;
+    }
 }
