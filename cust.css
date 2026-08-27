@@ -1,5 +1,140 @@
-public enum BondStatus {
+package com.scb.wealthcore.models.mutualfund;
+
+import com.scb.wealthcore.models.account.Account;
+import com.scb.wealthcore.models.product.Product;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "mutual_funds")
+public class MutualFund {
+
+    @Id
+    @Column(name = "mutual_fund_id")
+    private String mutualFundId;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @Column(name = "fund_name")
+    private String fundName;
+
+    @Column(name = "units")
+    private BigDecimal units;
+
+    @Column(name = "nav")
+    private BigDecimal nav;
+
+    @Column(name = "investment_amount")
+    private BigDecimal investmentAmount;
+
+    @Column(name = "current_value")
+    private BigDecimal currentValue;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private MutualFundStatus status;
+
+
+    public MutualFund() {
+    }
+
+
+    public String getMutualFundId() {
+        return mutualFundId;
+    }
+
+    public void setMutualFundId(String mutualFundId) {
+        this.mutualFundId = mutualFundId;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getFundName() {
+        return fundName;
+    }
+
+    public void setFundName(String fundName) {
+        this.fundName = fundName;
+    }
+
+    public BigDecimal getUnits() {
+        return units;
+    }
+
+    public void setUnits(BigDecimal units) {
+        this.units = units;
+    }
+
+    public BigDecimal getNav() {
+        return nav;
+    }
+
+    public void setNav(BigDecimal nav) {
+        this.nav = nav;
+    }
+
+    public BigDecimal getInvestmentAmount() {
+        return investmentAmount;
+    }
+
+    public void setInvestmentAmount(BigDecimal investmentAmount) {
+        this.investmentAmount = investmentAmount;
+    }
+
+    public BigDecimal getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(BigDecimal currentValue) {
+        this.currentValue = currentValue;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public MutualFundStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MutualFundStatus status) {
+        this.status = status;
+    }
+}
+
+package com.scb.wealthcore.models.mutualfund;
+
+public enum MutualFundStatus {
     ACTIVE,
-    MATURED,
+    INACTIVE,
     CLOSED
 }
