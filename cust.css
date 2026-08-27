@@ -1,64 +1,121 @@
-package com.scb.wealthcore.models.branch;
+package com.scb.wealthcore.models.product;
 
-import com.scb.wealthcore.models.rm.RM;
+import com.scb.wealthcore.models.fd.FD;
+import com.scb.wealthcore.models.bond.Bond;
+import com.scb.wealthcore.models.mutualfund.MutualFund;
+import com.scb.wealthcore.models.insurance.Insurance;
+import com.scb.wealthcore.models.portfoliomanagement.PortfolioManagement;
+
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "branch")
-public class Branch {
+@Table(name = "products")
+public class Product {
 
     @Id
-    @Column(name = "branch_id")
-    private String branchId;
+    @Column(name = "product_id")
+    private String productId;
 
-    @Column(name = "branch_name")
-    private String branchName;
+    @Column(name = "product_name")
+    private String productName;
 
-    @Column(name = "branch_address")
-    private String branchAddress;
-
-
-    // One Branch can have many RMs
-    @OneToMany(mappedBy = "branch")
-    private List<RM> rms = new ArrayList<>();
+    @Column(name = "description")
+    private String description;
 
 
-    public Branch() {
+    // One Product can have many Fixed Deposits
+    @OneToMany(mappedBy = "product")
+    private List<FD> fixedDeposits = new ArrayList<>();
+
+
+    // One Product can have many Bonds
+    @OneToMany(mappedBy = "product")
+    private List<Bond> bonds = new ArrayList<>();
+
+
+    // One Product can have many Mutual Funds
+    @OneToMany(mappedBy = "product")
+    private List<MutualFund> mutualFunds = new ArrayList<>();
+
+
+    // One Product can have many Insurances
+    @OneToMany(mappedBy = "product")
+    private List<Insurance> insurances = new ArrayList<>();
+
+
+    // One Product can have many Portfolio Management records
+    @OneToMany(mappedBy = "product")
+    private List<PortfolioManagement> portfolioManagements = new ArrayList<>();
+
+
+    public Product() {
     }
 
 
-    public String getBranchId() {
-        return branchId;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setBranchId(String branchId) {
-        this.branchId = branchId;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public String getBranchName() {
-        return branchName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getBranchAddress() {
-        return branchAddress;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBranchAddress(String branchAddress) {
-        this.branchAddress = branchAddress;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public List<RM> getRms() {
-        return rms;
+    public List<FD> getFixedDeposits() {
+        return fixedDeposits;
     }
 
-    public void setRms(List<RM> rms) {
-        this.rms = rms;
+    public void setFixedDeposits(List<FD> fixedDeposits) {
+        this.fixedDeposits = fixedDeposits;
+    }
+
+    public List<Bond> getBonds() {
+        return bonds;
+    }
+
+    public void setBonds(List<Bond> bonds) {
+        this.bonds = bonds;
+    }
+
+    public List<MutualFund> getMutualFunds() {
+        return mutualFunds;
+    }
+
+    public void setMutualFunds(List<MutualFund> mutualFunds) {
+        this.mutualFunds = mutualFunds;
+    }
+
+    public List<Insurance> getInsurances() {
+        return insurances;
+    }
+
+    public void setInsurances(List<Insurance> insurances) {
+        this.insurances = insurances;
+    }
+
+    public List<PortfolioManagement> getPortfolioManagements() {
+        return portfolioManagements;
+    }
+
+    public void setPortfolioManagements(List<PortfolioManagement> portfolioManagements) {
+        this.portfolioManagements = portfolioManagements;
     }
 }
