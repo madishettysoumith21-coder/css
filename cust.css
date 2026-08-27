@@ -1,4 +1,4 @@
-package com.scb.wealthcore.models.mutualfund;
+package com.scb.wealthcore.models.insurance;
 
 import com.scb.wealthcore.models.account.Account;
 import com.scb.wealthcore.models.product.Product;
@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "mutual_funds")
-public class MutualFund {
+@Table(name = "insurances")
+public class Insurance {
 
     @Id
-    @Column(name = "mutual_fund_id")
-    private String mutualFundId;
+    @Column(name = "insurance_id")
+    private String insuranceId;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -23,39 +23,40 @@ public class MutualFund {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "fund_name")
-    private String fundName;
+    @Column(name = "insurance_name")
+    private String insuranceName;
 
-    @Column(name = "units")
-    private BigDecimal units;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subscription_type")
+    private SubscriptionType subscriptionType;
 
-    @Column(name = "nav")
-    private BigDecimal nav;
+    @Column(name = "premium_amount")
+    private BigDecimal premiumAmount;
 
-    @Column(name = "investment_amount")
-    private BigDecimal investmentAmount;
+    @Column(name = "coverage_amount")
+    private BigDecimal coverageAmount;
 
-    @Column(name = "current_value")
-    private BigDecimal currentValue;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private InsuranceStatus status;
 
     @Column(name = "start_date")
     private LocalDate startDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private MutualFundStatus status;
+    @Column(name = "maturity_date")
+    private LocalDate maturityDate;
 
 
-    public MutualFund() {
+    public Insurance() {
     }
 
 
-    public String getMutualFundId() {
-        return mutualFundId;
+    public String getInsuranceId() {
+        return insuranceId;
     }
 
-    public void setMutualFundId(String mutualFundId) {
-        this.mutualFundId = mutualFundId;
+    public void setInsuranceId(String insuranceId) {
+        this.insuranceId = insuranceId;
     }
 
     public Account getAccount() {
@@ -74,44 +75,44 @@ public class MutualFund {
         this.product = product;
     }
 
-    public String getFundName() {
-        return fundName;
+    public String getInsuranceName() {
+        return insuranceName;
     }
 
-    public void setFundName(String fundName) {
-        this.fundName = fundName;
+    public void setInsuranceName(String insuranceName) {
+        this.insuranceName = insuranceName;
     }
 
-    public BigDecimal getUnits() {
-        return units;
+    public SubscriptionType getSubscriptionType() {
+        return subscriptionType;
     }
 
-    public void setUnits(BigDecimal units) {
-        this.units = units;
+    public void setSubscriptionType(SubscriptionType subscriptionType) {
+        this.subscriptionType = subscriptionType;
     }
 
-    public BigDecimal getNav() {
-        return nav;
+    public BigDecimal getPremiumAmount() {
+        return premiumAmount;
     }
 
-    public void setNav(BigDecimal nav) {
-        this.nav = nav;
+    public void setPremiumAmount(BigDecimal premiumAmount) {
+        this.premiumAmount = premiumAmount;
     }
 
-    public BigDecimal getInvestmentAmount() {
-        return investmentAmount;
+    public BigDecimal getCoverageAmount() {
+        return coverageAmount;
     }
 
-    public void setInvestmentAmount(BigDecimal investmentAmount) {
-        this.investmentAmount = investmentAmount;
+    public void setCoverageAmount(BigDecimal coverageAmount) {
+        this.coverageAmount = coverageAmount;
     }
 
-    public BigDecimal getCurrentValue() {
-        return currentValue;
+    public InsuranceStatus getStatus() {
+        return status;
     }
 
-    public void setCurrentValue(BigDecimal currentValue) {
-        this.currentValue = currentValue;
+    public void setStatus(InsuranceStatus status) {
+        this.status = status;
     }
 
     public LocalDate getStartDate() {
@@ -122,19 +123,26 @@ public class MutualFund {
         this.startDate = startDate;
     }
 
-    public MutualFundStatus getStatus() {
-        return status;
+    public LocalDate getMaturityDate() {
+        return maturityDate;
     }
 
-    public void setStatus(MutualFundStatus status) {
-        this.status = status;
+    public void setMaturityDate(LocalDate maturityDate) {
+        this.maturityDate = maturityDate;
     }
 }
 
-package com.scb.wealthcore.models.mutualfund;
+package com.scb.wealthcore.models.insurance;
 
-public enum MutualFundStatus {
+public enum SubscriptionType {
+    INDIVIDUAL,
+    FAMILY
+}
+
+package com.scb.wealthcore.models.insurance;
+
+public enum InsuranceStatus {
     ACTIVE,
     INACTIVE,
-    CLOSED
+    EXPIRED
 }
