@@ -1,15 +1,265 @@
-useEffect(() => {
-        fetch("http://localhost:8080/api/customers")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch customers");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setCustomers(data);
-            })
-            .catch((error) => {
-                console.error("Error fetching customers:", error);
-            });
-    }, []);
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "customers")
+public class Customer {
+
+    @Id
+    @Column(name = "customer_id")
+    private String customerId;
+
+    // Many customers can belong to one RM
+    @ManyToOne
+    @JoinColumn(name = "rm_id")
+    private RM rm;
+
+    @Column(name = "cus_first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "cus_last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "phone")
+    private Integer phone;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "country")
+    private String country;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language_choice")
+    private LanguageChoice languageChoice;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "customer_type")
+    private CustomerType customerType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "segment")
+    private Segment segment;
+
+    @Column(name = "added_at")
+    private LocalDateTime addedAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority")
+    private Priority priority;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private CustomerStatus status;
+
+
+    // One customer can have multiple accounts
+    @OneToMany(mappedBy = "customer")
+    private List<Account> accounts = new ArrayList<>();
+
+    // One customer can have multiple advice logs
+    @OneToMany(mappedBy = "customer")
+    private List<AdviceLog> adviceLogs = new ArrayList<>();
+
+    // One customer can have multiple statement logs
+    @OneToMany(mappedBy = "customer")
+    private List<StatementLog> statementLogs = new ArrayList<>();
+
+    // One customer can have multiple alerts
+    @OneToMany(mappedBy = "customer")
+    private List<Alert> alerts = new ArrayList<>();
+
+
+    public Customer() {
+    }
+
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public RM getRm() {
+        return rm;
+    }
+
+    public void setRm(RM rm) {
+        this.rm = rm;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public LanguageChoice getLanguageChoice() {
+        return languageChoice;
+    }
+
+    public void setLanguageChoice(LanguageChoice languageChoice) {
+        this.languageChoice = languageChoice;
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
+    }
+
+    public Segment getSegment() {
+        return segment;
+    }
+
+    public void setSegment(Segment segment) {
+        this.segment = segment;
+    }
+
+    public LocalDateTime getAddedAt() {
+        return addedAt;
+    }
+
+    public void setAddedAt(LocalDateTime addedAt) {
+        this.addedAt = addedAt;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public CustomerStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CustomerStatus status) {
+        this.status = status;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public List<AdviceLog> getAdviceLogs() {
+        return adviceLogs;
+    }
+
+    public void setAdviceLogs(List<AdviceLog> adviceLogs) {
+        this.adviceLogs = adviceLogs;
+    }
+
+    public List<StatementLog> getStatementLogs() {
+        return statementLogs;
+    }
+
+    public void setStatementLogs(List<StatementLog> statementLogs) {
+        this.statementLogs = statementLogs;
+    }
+
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+}
+
+
+package com.example.demo.model;
+
+public enum LanguageChoice {
+    ENGLISH,
+    CHINESE
+}
+
+package com.example.demo.model;
+
+public enum CustomerType {
+    PREMIUM,
+    STANDARD,
+    REGULAR
+}
+
+package com.example.demo.model;
+
+public enum Segment {
+    HNI,
+    UHNI
+}
+
+package com.example.demo.model;
+
+public enum Priority {
+    LOW,
+    MEDIUM,
+    HIGH
+}
+
+package com.example.demo.model;
+
+public enum CustomerStatus {
+    ACTIVE,
+    INACTIVE
+}
