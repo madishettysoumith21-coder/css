@@ -1,127 +1,84 @@
-package com.scb.wealthcore.models.portfoliomanagement;
+package com.scb.wealthcore.models.advice;
 
-import com.scb.wealthcore.models.account.Account;
-import com.scb.wealthcore.models.product.Product;
+import com.scb.wealthcore.models.customer.Customer;
+import com.scb.wealthcore.models.rm.RM;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "portfolio_management")
-public class PortfolioManagement {
+@Table(name = "advice_logs")
+public class AdviceLog {
 
     @Id
-    @Column(name = "portfolio_id")
-    private String portfolioId;
+    @Column(name = "advice_id")
+    private String adviceId;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @JoinColumn(name = "rm_id")
+    private RM rm;
 
-    @Column(name = "portfolio_value")
-    private BigDecimal portfolioValue;
-
-    @Column(name = "management_fee")
-    private BigDecimal managementFee;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "profile_risk")
-    private ProfileRisk profileRisk;
-
-    @Column(name = "start_date")
-    private LocalDate startDate;
+    @Column(name = "advice_date")
+    private LocalDateTime adviceDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private PortfolioStatus status;
+    private AdviceStatus status;
 
 
-    public PortfolioManagement() {
+    public AdviceLog() {
     }
 
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public String getAdviceId() {
+        return adviceId;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public void setAdviceId(String adviceId) {
+        this.adviceId = adviceId;
     }
 
-    public Account getAccount() {
-        return account;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Product getProduct() {
-        return product;
+    public RM getRm() {
+        return rm;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setRm(RM rm) {
+        this.rm = rm;
     }
 
-    public BigDecimal getPortfolioValue() {
-        return portfolioValue;
+    public LocalDateTime getAdviceDate() {
+        return adviceDate;
     }
 
-    public void setPortfolioValue(BigDecimal portfolioValue) {
-        this.portfolioValue = portfolioValue;
+    public void setAdviceDate(LocalDateTime adviceDate) {
+        this.adviceDate = adviceDate;
     }
 
-    public BigDecimal getManagementFee() {
-        return managementFee;
-    }
-
-    public void setManagementFee(BigDecimal managementFee) {
-        this.managementFee = managementFee;
-    }
-
-    public ProfileRisk getProfileRisk() {
-        return profileRisk;
-    }
-
-    public void setProfileRisk(ProfileRisk profileRisk) {
-        this.profileRisk = profileRisk;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public PortfolioStatus getStatus() {
+    public AdviceStatus getStatus() {
         return status;
     }
 
-    public void setStatus(PortfolioStatus status) {
+    public void setStatus(AdviceStatus status) {
         this.status = status;
     }
 }
 
-package com.scb.wealthcore.models.portfoliomanagement;
+package com.scb.wealthcore.models.advice;
 
-public enum ProfileRisk {
-    LOW,
-    MEDIUM,
-    HIGH
-}
-
-package com.scb.wealthcore.models.portfoliomanagement;
-
-public enum PortfolioStatus {
-    ACTIVE,
-    INACTIVE,
-    CLOSED
+public enum AdviceStatus {
+    GENERATED,
+    SENT,
+    FAILED
 }
