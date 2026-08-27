@@ -1,42 +1,64 @@
-package com.scb.wealthcore.models.rm;
+package com.scb.wealthcore.models.branch;
 
-import com.scb.wealthcore.models.customer.Customer;
+import com.scb.wealthcore.models.rm.RM;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "rm")
-public class RM {
+@Table(name = "branch")
+public class Branch {
 
     @Id
-    @Column(name = "rm_id")
-    private String rmId;
+    @Column(name = "branch_id")
+    private String branchId;
 
-    // Add the RM columns from your schema here
+    @Column(name = "branch_name")
+    private String branchName;
 
-    @OneToMany(mappedBy = "rm")
-    private List<Customer> customers = new ArrayList<>();
+    @Column(name = "branch_address")
+    private String branchAddress;
 
 
-    public RM() {
+    // One Branch can have many RMs
+    @OneToMany(mappedBy = "branch")
+    private List<RM> rms = new ArrayList<>();
+
+
+    public Branch() {
     }
 
 
-    public String getRmId() {
-        return rmId;
+    public String getBranchId() {
+        return branchId;
     }
 
-    public void setRmId(String rmId) {
-        this.rmId = rmId;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
-    public List<Customer> getCustomers() {
-        return customers;
+    public String getBranchName() {
+        return branchName;
     }
 
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getBranchAddress() {
+        return branchAddress;
+    }
+
+    public void setBranchAddress(String branchAddress) {
+        this.branchAddress = branchAddress;
+    }
+
+    public List<RM> getRms() {
+        return rms;
+    }
+
+    public void setRms(List<RM> rms) {
+        this.rms = rms;
     }
 }
