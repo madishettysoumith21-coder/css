@@ -1,60 +1,35 @@
-I have already created the POJO/entity classes for the database structure based on the frontend requirements.
+GET
 
-I now need to implement the backend flow for the Customer List requirement:
+/api/customers/{id}
 
-GET /customers
+PUT
 
-The response must provide the customer data required by the frontend, including the required nested products and transactions.
+/api/customers/{id}
 
-I want you to work in PLAN MODE ONLY for now. Do NOT modify, create, delete, or rewrite any files.
+POST
 
-First, thoroughly inspect the existing project structure and codebase, especially:
-- Customer.java and all related customer model/entity classes
-- Account and account-related classes
-- Product-related classes
-- Transaction-related classes
-- Any other entities/models that have relationships with Customer
-- Existing repositories, services, controllers, DTOs, mappers, exception handling, and configuration
-- Existing database schema/migrations and H2 structure
-- Existing frontend code that consumes or will consume the customer list API
+/api/customers
 
-Do not assume class names, fields, relationships, or packages. Read the actual code and determine how everything currently works.
+GET
 
-Then analyze the requirement and explain:
+/api/customers/{customerId}/statement-data
 
-1. What the exact backend requirement is.
-2. What data the frontend needs from GET /customers.
-3. Which existing entities/classes are involved.
-4. How the entity relationships currently work.
-5. Whether the current entity relationships are correct for this requirement.
-6. What repositories are needed.
-7. What service-layer logic is needed.
-8. Whether CustomerDTO and nested DTOs are required and what each should contain.
-9. What CustomerController endpoint should look like.
-10. How Customer → Accounts → Products/Transactions (and any other required relationships) should flow.
-11. Whether we should use JPA relationships, repository queries, fetch joins, EntityGraph, or another approach, and why.
-12. How to avoid N+1 query problems and infinite JSON serialization/recursion.
-13. What database tables and foreign-key relationships are involved.
-14. What tests are required.
-15. What files need to be created or modified.
+GET
 
-Give me the implementation plan in the correct order, from backend data retrieval through controller response and tests.
+/api/customers/{customerId}/card
 
-For every proposed change, mention:
-- File/class name
-- What needs to be changed
-- Why it needs to be changed
-- How it connects to the next layer
+GET
 
-Important constraints:
-- Reuse the existing classes and project architecture wherever possible.
-- Do not duplicate existing models or create unnecessary classes.
-- Do not change the database structure unless the existing structure cannot satisfy the requirement.
-- Do not change the frontend unless it is necessary.
-- Do not write implementation code yet.
-- Do not make assumptions when something is unclear; identify it as something that needs to be verified.
-- Clearly distinguish what already exists from what needs to be implemented.
+/api/customers/unassigned
 
-At the end, provide a concise step-by-step implementation checklist that I can follow one task at a time.
+GET
 
-Again: PLAN ONLY. Do not make any code changes.
+/api/customers/current
+
+GET
+
+/api/customers/card
+
+GET
+
+/api/customer
