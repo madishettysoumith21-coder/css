@@ -1,13 +1,13 @@
 Hi Team,
 
-As discussed during today's internal connect, we are currently working on the following items for the TDM LLM Assistant:
+As discussed during today's internal connect, we reviewed the following requirements and identified the key areas that need to be addressed for the TDM LLM Assistant:
 
-1. Onboarding the TDM database.
-2. Implementing a login mechanism for the TDM LLM Assistant using a Personal Access Token (PAT).
-3. Implementing data locking and releasing functionality.
-4. Obtaining the required API endpoint and repository access.
+1. TDM database onboarding needs to be completed.
+2. A login mechanism using a Personal Access Token (PAT) needs to be implemented.
+3. Data locking and releasing functionality needs to be implemented.
+4. The required API endpoint and repository access need to be obtained.
 
-Please let us know if any additional information or action is required from our side.
+These are the key requirements discussed, and the necessary actions need to be taken to proceed with the implementation.
 
 Thanks & Regards,
 Soumith
