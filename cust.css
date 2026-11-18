@@ -1,13 +1,15 @@
 $root = "$env:APPDATA\Code\User\workspaceStorage"
 
-Get-ChildItem $root -Directory | ForEach-Object {
-    $file = Join-Path $_.FullName "workspace.json"
+$ids = @(
+    "ee1e917ce9fbbcd228218aa384ff31a9",
+    "ff851abc622b2e1272cafde101cd01bc"
+)
 
-    if (Test-Path $file) {
-        $content = Get-Content $file -Raw
-        if ($content -match "50569-02-tdm-llm-assistant-api") {
-            Write-Host "FOUND:" $_.FullName -ForegroundColor Green
-            Write-Host $content
-        }
-    }
+foreach ($id in $ids) {
+    $path = Join-Path $root $id
+
+    Write-Host "`n========== $id ==========" -ForegroundColor Green
+
+    Get-ChildItem $path -Recurse -File |
+        Select-Object FullName, Length, LastWriteTime
 }
