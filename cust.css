@@ -1,9 +1,19 @@
 $root = "$env:APPDATA\Code\User\workspaceStorage"
+$backup = "$env:USERPROFILE\Desktop\Copilot_Chat_Recovery"
 
-Get-ChildItem $root -Recurse -File |
-Where-Object {
-    $_.Name -match 'chat|session' -or
-    $_.FullName -match 'chatSessions'
-} |
-Select-Object FullName, Length, LastWriteTime |
-Format-List
+New-Item -ItemType Directory -Path $backup -Force
+
+$ids = @(
+    "ee1e917ce9fbbcd228218aa384ff31a9",
+    "ff851abc622b2e1272cafde101cd01bc"
+)
+
+foreach ($id in $ids) {
+    $source = Join-Path $root "$id\chatSessions"
+
+    if (Test-Path $source) {
+        Copy-Item $source (Join-Path $backup $id) -Recurse -Force
+    }
+}
+
+Write-Host "Chat backup completed!" -ForegroundColor Green
