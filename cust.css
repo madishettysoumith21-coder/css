@@ -1,1 +1,2 @@
-explorer "$env:USERPROFILE\Desktop\Copilot_Chat_Recovery"
+Get-ChildItem "$env:USERPROFILE\Desktop\Copilot_Chat_Recovery" -Recurse -File |
+Measure-Object -Property Length -Sum
