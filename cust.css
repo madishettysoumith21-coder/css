@@ -1,14 +1,40 @@
 $root = "$env:APPDATA\Code\User\workspaceStorage"
+$backup = "$env:USERPROFILE\Desktop\Copilot_Chat_Recovery"
 
-Get-ChildItem $root -Directory | ForEach-Object {
-    $file = Join-Path $_.FullName "workspace.json"
+$sourceIds = @(
+    "ee1e917ce9fbbcd228218aa384ff31a9",
+    "ff851abc622b2e1272cafde101cd01bc"
+)
 
-    if (Test-Path $file) {
-        $match = Select-String -Path $file -Pattern "portal|50569-02-tdm-llm-assistant-api3"
+$targetIds = @(
+    "4a6a62882d60f01bf9f1e47018b939eb",
+    "c6e13c8c3e372fbb020a5864343e373b"
+)
 
-        if ($match) {
-            Write-Host "`nWORKSPACE ID: $($_.Name)" -ForegroundColor Green
-            Get-Content $file
+foreach ($targetId in $targetIds) {
+
+    $target = Join-Path $root "$targetId\chatSessions"
+
+    New-Item -ItemType Directory -Path $target -Force |
+        Out-Null
+
+    foreach ($sourceId in $sourceIds) {
+
+        $source = Join-Path $backup "$sourceId\chatSessions"
+
+        if (Test-Path $source) {
+
+            Get-ChildItem $source -File -Recurse |
+                ForEach-Object {
+
+                    $destination = Join-Path $target $_.Name
+
+                    if (!(Test-Path $destination)) {
+                        Copy-Item $_.FullName $destination
+                    }
+                }
         }
     }
+
+    Write-Host "Restored into $targetId" -ForegroundColor Green
 }
