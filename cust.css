@@ -1,2 +1,12 @@
-Get-ChildItem "$env:USERPROFILE\Desktop\Copilot_Chat_Recovery" -Recurse -File |
-Measure-Object -Property Length -Sum
+$root = "$env:APPDATA\Code\User\workspaceStorage"
+
+Get-ChildItem $root -Directory | ForEach-Object {
+    $f = Join-Path $_.FullName "workspace.json"
+
+    if (Test-Path $f) {
+        [PSCustomObject]@{
+            ID = $_.Name
+            Workspace = (Get-Content $f -Raw)
+        }
+    }
+} | Format-List
