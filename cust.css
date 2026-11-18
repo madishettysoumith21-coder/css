@@ -1,1 +1,13 @@
-explorer "$env:APPDATA\Code\User\workspaceStorage"
+$root = "$env:APPDATA\Code\User\workspaceStorage"
+
+Get-ChildItem $root -Directory | ForEach-Object {
+    $file = Join-Path $_.FullName "workspace.json"
+
+    if (Test-Path $file) {
+        $content = Get-Content $file -Raw
+        if ($content -match "50569-02-tdm-llm-assistant-api") {
+            Write-Host "FOUND:" $_.FullName -ForegroundColor Green
+            Write-Host $content
+        }
+    }
+}
